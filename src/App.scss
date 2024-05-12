@@ -1,0 +1,71 @@
+@mixin break($width) {
+    @media screen and (max-width: $width) {
+      @content
+    }
+}
+
+
+body{
+    background-color: #181818;
+}
+.hero{
+    background-image: url(./images/hero.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.nav{
+    background: linear-gradient(270deg, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+    a{
+        font-size: 24px;
+        margin-right: 48px;
+        @include break(768px) {
+            font-size: 16px;
+            margin-right: 28px;
+          }
+    }
+}
+.yellow{
+    color: #F0FF42;
+}
+
+.button{
+    background-color: #F0FF42;
+    color: #181818;
+    border-radius: 35px;
+    padding: 5px 20px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 26px;
+    font-style: italic;
+      
+      @include break(768px) {
+        font-size: 18px;
+        padding: 5px 15px;
+      }
+}
+.black{
+    background-color: #181818;
+    color: #F0FF42;
+}
+
+#login{
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    border: 3px solid #F0FF42;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+}
+
+input{
+    border-radius: 30px;
+    border: 2px solid #F0FF42;
+    background-color: #181818;
+    padding: 5px;
+}
+
+.hide{
+    display: none;
+}
