@@ -1,5 +1,5 @@
 
-import { CiLogin } from 'react-icons/ci';
+import { CiHome, CiLogin } from 'react-icons/ci';
 import './App.scss';
 import logo from './images/Logo.png'
 import graphs from './images/graphs.png'
@@ -10,21 +10,37 @@ import { CgClose } from 'react-icons/cg';
 import { useState } from 'react';
 function App() {
 
-  var [hide, setHide] = useState(true)
+  const [hide, setHide] = useState(true);
+  const [logined, setLogined] = useState(false);
+
+
+  const validateEmail = () => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const email = document.getElementById('email').value;
+    const passwordinput = document.getElementById('password').value;
+    const password = "12345"
+  if (regex.test(email) && passwordinput == password) {
+    setLogined(true);
+    setHide(!hide);
+  } else {
+    setLogined(false);
+    alert("wrong email or password")
+  }
+  }
+
 
   return (
     <div className="App text-white">
-
-
-<div className={hide ? "hide" : ""}>
-      <div className='fixed py-12 px-4 md:py-24 md:px-48 z-30 ' id='login'>
-        <button className='text-[#F0FF42] absolute top-5 right-5 text-2xl' onClick={() => setHide(!hide)}><CgClose /></button>
-        <h1 className='text-md md:text-lg'>Email</h1>
-        <input type='text'></input>
-        <h1 className='text-md md:text-lg'>Password</h1>
-        <input type='password' className='mb-5'></input>
-        <div><a href='' className='button'>Login</a></div>
-      </div>
+      
+      <div className={hide ? "hide" : ""}>
+        <div className='fixed py-12 px-4 md:py-24 md:px-48 z-30 ' id='login'>
+          <button className='text-[#F0FF42] absolute top-5 right-5 text-2xl' onClick={() => setHide(!hide)}><CgClose /></button>
+          <h1 className='text-md md:text-lg' >Email</h1>
+          <input type='email' id='email' ></input>
+          <h1 className='text-md md:text-lg'>Password</h1>
+          <input type='password' className='mb-5'  id='password'></input>
+          <div><div className='button' onClick={() => {validateEmail()}}>Login</div></div>
+        </div>
       </div>
 
       <section className='hero'>
@@ -35,7 +51,9 @@ function App() {
           <div className='flex items-center'>
             <a href=''>Plan</a>
             <a href=''>Tracker</a>
-            <div onClick={() => setHide(!hide)}><CiLogin className='text-2xl md:text-4xl lg:text-6xl hover:cursor-pointer' /></div>
+            <div >
+              {logined ?  <CiHome className='text-2xl md:text-4xl lg:text-6xl hover:cursor-pointer' /> : <CiLogin className='text-2xl md:text-4xl lg:text-6xl hover:cursor-pointer' onClick={() => setHide(!hide)}/>}
+              </div>
           </div>
         </div>
         <div className='h-[40vh] flex flex-col justify-end w-full items-end md:h-[80vh]'>
