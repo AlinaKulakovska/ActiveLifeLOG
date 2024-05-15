@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/activelifelog/static/css/main.c456f86b.css",
+    "main.js": "/activelifelog/static/js/main.5994b050.js",
+    "static/js/453.c232363a.chunk.js": "/activelifelog/static/js/453.c232363a.chunk.js",
+    "static/media/hero.png": "/activelifelog/static/media/hero.10622e7a0286ed2e6d49.png",
+    "static/media/exercises.png": "/activelifelog/static/media/exercises.7fa896caa8ac9baa6219.png",
+    "static/media/graphs.png": "/activelifelog/static/media/graphs.9aa090ff727123cb5882.png",
+    "static/media/person1.png": "/activelifelog/static/media/person1.e9537d781c7c050da16b.png",
+    "static/media/person2.png": "/activelifelog/static/media/person2.edfd0770008f128bcfb2.png",
+    "index.html": "/activelifelog/index.html",
+    "main.c456f86b.css.map": "/activelifelog/static/css/main.c456f86b.css.map",
+    "main.5994b050.js.map": "/activelifelog/static/js/main.5994b050.js.map",
+    "453.c232363a.chunk.js.map": "/activelifelog/static/js/453.c232363a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c456f86b.css",
+    "static/js/main.5994b050.js"
+  ]
+}
