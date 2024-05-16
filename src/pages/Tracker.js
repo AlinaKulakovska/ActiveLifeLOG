@@ -4,16 +4,16 @@ import victory from '../images/Victory.png'
 import { CiUser } from 'react-icons/ci';
 import { CgAlbum, CgCalendarDates, CgLogOut } from 'react-icons/cg';
 import Footer from '../components/Footer.js';
-import { useState } from 'react';
+
 
 function Tracker() {
 
-
+// restrict accsess
     return (
         <div className='text-white'>
             <div className='nav py-2 px-10 flex justify-between w-full items-center'>
                 <div>
-                    <img src={logo} className='w-24 md:w-48'></img>
+                    <img src={logo} className='w-24 md:w-48' alt='logo'></img>
                 </div>
                 <div className='flex items-center relative text-2xl md:text-3xl lg:text-5xl'>
                     <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
@@ -25,7 +25,7 @@ function Tracker() {
 
 
             <div className='w-full flex flex-col items-center'>
-                <img src={victory} className='w-1/3'></img>
+                <img src={victory} className='w-1/3' alt='victory'></img>
                 <h1 className='text-4xl text-bold'>Tracker of your achievements</h1>
             </div>
             <div className="mt-6" >

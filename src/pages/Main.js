@@ -42,19 +42,20 @@ function Main() {
                     <button className='text-[#F0FF42] absolute top-5 right-5 text-2xl' onClick={() => setHide(!hide)}><CgClose /></button>
                     <h1 className='text-md md:text-lg' >Email</h1>
                     <input type='email' id='email' ></input>
-                    <h1 className='text-md md:text-lg'>Password</h1>
-                    <input type='password' className='mb-5' id='password'></input>
-                    <div><div className='button' onClick={() => { validateEmail() }}>Login</div></div>
+                    {/* <h1 className='text-md md:text-lg'>Password</h1>
+                    <input type='password' className='mb-5' id='password'></input> */}
+                    <div className='button mt-5' onClick={() => { validateEmail() }}>Login</div>
                 </div>
             </div>
 
             <section className='hero'>
                 <div className='nav py-2 px-10 flex justify-between w-full  items-center'>
                     <Link to='/' >  <div>
-                        <img src={logo} className='w-24 md:w-48'></img>
+                        <img src={logo} className='w-24 md:w-48' alt="logo"></img>
                     </div></Link>
                     <div className='flex items-center relative text-2xl md:text-3xl lg:text-5xl'>
-                        {logined ? <div className='flex'>  <Link to='/' className='flex items-center '><CgAlbum />Plan</Link>
+                        {logined ? <div className='flex'> 
+                         <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
                             <Link to='/tracker' className='flex items-center'><CgCalendarDates /> Tracker</Link>
                             <Link to='/' className='flex items-center' onClick={() => { setLogined(false); setHideMenu(!hidemenu) }}><CgLogOut /> LogOut</Link>
                         </div> : ''}
