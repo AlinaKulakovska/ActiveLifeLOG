@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
 
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<Main />}/> 
           <Route path="/tracker" element={<Tracker />} />
