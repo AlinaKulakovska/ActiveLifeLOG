@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/ActiveLifeLOG/static/css/main.7a1a3ead.css",
-    "main.js": "/ActiveLifeLOG/static/js/main.a97b9c46.js",
+    "main.css": "/ActiveLifeLOG/static/css/main.2a1ed48f.css",
+    "main.js": "/ActiveLifeLOG/static/js/main.b1d0914d.js",
     "static/js/453.c232363a.chunk.js": "/ActiveLifeLOG/static/js/453.c232363a.chunk.js",
     "static/media/hero.png": "/ActiveLifeLOG/static/media/hero.10622e7a0286ed2e6d49.png",
     "static/media/exercises.png": "/ActiveLifeLOG/static/media/exercises.7fa896caa8ac9baa6219.png",
@@ -11,12 +11,12 @@
     "static/media/person2.png": "/ActiveLifeLOG/static/media/person2.edfd0770008f128bcfb2.png",
     "static/media/Victory.png": "/ActiveLifeLOG/static/media/Victory.a344e82f621965cca044.png",
     "index.html": "/ActiveLifeLOG/index.html",
-    "main.7a1a3ead.css.map": "/ActiveLifeLOG/static/css/main.7a1a3ead.css.map",
-    "main.a97b9c46.js.map": "/ActiveLifeLOG/static/js/main.a97b9c46.js.map",
+    "main.2a1ed48f.css.map": "/ActiveLifeLOG/static/css/main.2a1ed48f.css.map",
+    "main.b1d0914d.js.map": "/ActiveLifeLOG/static/js/main.b1d0914d.js.map",
     "453.c232363a.chunk.js.map": "/ActiveLifeLOG/static/js/453.c232363a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7a1a3ead.css",
-    "static/js/main.a97b9c46.js"
+    "static/css/main.2a1ed48f.css",
+    "static/js/main.b1d0914d.js"
   ]
 }
