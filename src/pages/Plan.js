@@ -6,24 +6,45 @@ import { CgAlbum, CgCalendarDates, CgLogOut } from 'react-icons/cg';
 import Footer from '../components/Footer.js';
 import workoutdata from '../components/workoutdata.js'
 import Card from '../components/Card.js'
-
-function createCard(work) {
-    return (
-      <Card
-        key={work.id}
-        name={work.name}
-        imgURL={work.imgURL}
-        about={work.about}
-        time={work.time}
-        level={work.level}
-        equipment={work.equipment}
-      />
-    );
-  }
+import { useState } from 'react';
 
 function Plan() {
 
     // restrict accsess
+
+
+    const [workoutsdata, setWorkoutsData] = useState(workoutdata)
+
+    function filter() {
+        let radio = document.querySelector('input[name="select"]:checked').value;
+        if (radio >= 45) {
+            setWorkoutsData(workoutdata.filter((item) => item.time >= 45));
+        } else if (radio <= 25) {
+            setWorkoutsData(workoutdata.filter((item) => item.time <= 25));
+        } else if (radio > 25 && radio < 45) {
+            setWorkoutsData(workoutdata.filter((item) => item.time > 25 && item.time < 45));
+        }
+    }
+
+    function random() {
+        const randomIndex = Math.floor(Math.random() * workoutdata.length);
+        setWorkoutsData([workoutdata[randomIndex]])
+    }
+   
+    function createCard(work) {
+        return (
+            <Card
+                key={work.id}
+                name={work.name}
+                imgURL={work.imgURL}
+                about={work.about}
+                time={work.time}
+                level={work.level}
+                equipment={work.equipment}
+             
+            />
+        );
+    }
 
     return (
         <div className='text-white'>
@@ -46,25 +67,25 @@ function Plan() {
             </div>
 
             <div className='flex flex-col justify-between mt-5 mx-5 md:flex-row'>
-                <div class="wrapper  ">
-                    <input type="radio" name="select" value={20} id="option-1" />
-                    <input type="radio" name="select" value={30} id="option-2" />
-                    <input type="radio" name="select" value={40} id="option-3" />
-                    <label for="option-1" class="option option-1">
+                <div className="wrapper">
+                    <input type="radio" name="select" value={25} id="option-1" onClick={filter} />
+                    <input type="radio" name="select" value={35} id="option-2" onClick={filter} />
+                    <input type="radio" name="select" value={45} id="option-3" onClick={filter} />
+                    <label htmlFor="option-1" className="option option-1">
                         <span>&gt;25</span>
                     </label>
-                    <label for="option-2" class="option option-2">
+                    <label htmlFor="option-2" className="option option-2">
                         <span>25-45</span>
                     </label>
-                    <label for="option-3" class="option option-3">
+                    <label htmlFor="option-3" className="option option-3">
                         <span>45+</span>
                     </label>
                 </div>
-                <button className='button'>Pick a random workout</button>
+                <button className='button' onClick={random}>Pick a random workout</button>
             </div>
             <h1 className='text-4xl text-center text-bold max-w-1/3'>Recent</h1>
             <div className='flex flex-wrap  justify-center mx-5'>
-            {workoutdata.map(createCard)}
+                {workoutsdata.map(createCard)}
             </div>
 
 

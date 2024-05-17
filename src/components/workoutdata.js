@@ -7,7 +7,7 @@ const workoutdata = [
       about:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       level:"Beginer",
       equipment:"No equipment",
-      time:"20 min",
+      time:20,
     },
     {
       id: "2",
@@ -17,7 +17,7 @@ const workoutdata = [
       about:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       level:"Intermidiate",
       equipment:"Dumbbells",
-      time:"35 min",
+      time:35,
     },
     {
       id: "3",
@@ -27,7 +27,7 @@ const workoutdata = [
       about:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       level:"Advanced",
       equipment:"Elastic band",
-      time:"45 min",
+      time:60,
     }
   ];
   
