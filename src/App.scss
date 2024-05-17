@@ -24,6 +24,10 @@ body {
         }
     }
 }
+.scrollbar{
+    scrollbar-width: none; 
+    text-align: justify;   
+}
 .card {
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
     border-radius: 25px;
@@ -42,7 +46,6 @@ body {
     justify-content: space-evenly;
 
 }
-
 
 .wrapper .option {
     background: #f0ff42;

@@ -7,12 +7,16 @@ import workoutdata from '../components/workoutdata.js'
 import { useState } from "react";
 function Workout() {
 
+    // add timer 
+    // spotify link
+    // exersises list
+
     let x = workoutdata.filter(item => item.name === sessionStorage.getItem("name"))
-    const [youtubelink, setYoutubeLink] = useState("https://www.youtube.com/embed/GViX8riaHX4?si=wNk62zSPdyItVTLT")
+    const [youtubelink, setYoutubeLink] = useState("https://www.youtube.com/embed/" + x[0].videourl + "&mute=1&rel=0")
     function searchlink() {
         let link = document.getElementById("youtubelink").value
         setYoutubeLink("https://www.youtube.com/embed/" + link + "&mute=1&rel=0")
-        link = ''
+        document.getElementById("youtubelink").value = ''
     }
     return (
         <div className="text-white">
@@ -32,7 +36,7 @@ function Workout() {
                     <input type="text" placeholder="insert spotify playlist link" className="p-2 px-6 mb-2" id="spotifylink"></input>
                     <iframe className="radius-md " title="spotify" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX3oM43CtKnRV?utm_source=generator&theme=0" width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
-                <div className="flex flex-col justify-center md:justify-between md:flex-row-reverse">
+                <div className="flex flex-col items-center justify-center md:justify-between md:flex-row-reverse">
                     <div className="text-2xl md:text-4xl text-[#F0FF42] text-right font-bold">Timer 23:32</div>
                     <div className="flex items-center">
                         <input type="text" placeholder="insert youtube video link" className="p-2 px-6 m-2 " id="youtubelink"></input>

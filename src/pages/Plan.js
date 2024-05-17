@@ -11,7 +11,7 @@ import { useState } from 'react';
 function Plan() {
 
     // restrict accsess
-
+    // add favorites 
 
     const [workoutsdata, setWorkoutsData] = useState(workoutdata)
 
@@ -30,7 +30,7 @@ function Plan() {
         const randomIndex = Math.floor(Math.random() * workoutdata.length);
         setWorkoutsData([workoutdata[randomIndex]])
     }
-   
+
     function createCard(work) {
         return (
             <Card
@@ -41,7 +41,7 @@ function Plan() {
                 time={work.time}
                 level={work.level}
                 equipment={work.equipment}
-             
+
             />
         );
     }
