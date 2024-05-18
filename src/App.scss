@@ -40,6 +40,15 @@ body {
         cursor: pointer;
     }
 }
+.choice{
+    img {
+        filter: saturate(0);
+    }
+    img:hover {
+        filter: saturate(1);
+        cursor: pointer;
+    }
+}
 .wrapper {
     display: inline-flex;
     align-items: center;

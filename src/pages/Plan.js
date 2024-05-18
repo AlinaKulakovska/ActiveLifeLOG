@@ -11,7 +11,8 @@ import { useState } from 'react';
 function Plan() {
 
     // restrict accsess
-    // add favorites 
+
+
 
     const [workoutsdata, setWorkoutsData] = useState(workoutdata)
 
@@ -34,14 +35,14 @@ function Plan() {
     function createCard(work) {
         return (
             <Card
-                key={work.id}
+                key={work.key}
                 name={work.name}
                 imgURL={work.imgURL}
                 about={work.about}
                 time={work.time}
                 level={work.level}
                 equipment={work.equipment}
-
+                id={work.id}
             />
         );
     }
@@ -59,7 +60,6 @@ function Plan() {
                     <CiUser />
                 </div>
             </div>
-
 
             <div className='w-full flex flex-col items-center'>
                 <img src={coaches} className='w-1/2 md:w-1/3' alt='coaches'></img>
@@ -87,8 +87,6 @@ function Plan() {
             <div className='flex flex-wrap  justify-center mx-5'>
                 {workoutsdata.map(createCard)}
             </div>
-
-
             <div className="mt-6" >
                 <Footer /></div>
         </div>
