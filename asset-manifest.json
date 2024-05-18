@@ -1,22 +1,25 @@
 {
   "files": {
-    "main.css": "/ActiveLifeLOG/static/css/main.2a1ed48f.css",
-    "main.js": "/ActiveLifeLOG/static/js/main.b1d0914d.js",
+    "main.css": "/ActiveLifeLOG/static/css/main.b5648e94.css",
+    "main.js": "/ActiveLifeLOG/static/js/main.33e095a9.js",
     "static/js/453.c232363a.chunk.js": "/ActiveLifeLOG/static/js/453.c232363a.chunk.js",
     "static/media/hero.png": "/ActiveLifeLOG/static/media/hero.10622e7a0286ed2e6d49.png",
+    "static/media/timer.png": "/ActiveLifeLOG/static/media/timer.28692d60e92819bb1fe9.png",
+    "static/media/video.png": "/ActiveLifeLOG/static/media/video.40c0eff415d290ccaf99.png",
     "static/media/exercises.png": "/ActiveLifeLOG/static/media/exercises.7fa896caa8ac9baa6219.png",
     "static/media/graphs.png": "/ActiveLifeLOG/static/media/graphs.9aa090ff727123cb5882.png",
     "static/media/Coaches.png": "/ActiveLifeLOG/static/media/Coaches.2ba808b82c834adeb5e3.png",
     "static/media/person1.png": "/ActiveLifeLOG/static/media/person1.e9537d781c7c050da16b.png",
     "static/media/person2.png": "/ActiveLifeLOG/static/media/person2.edfd0770008f128bcfb2.png",
     "static/media/Victory.png": "/ActiveLifeLOG/static/media/Victory.a344e82f621965cca044.png",
+    "static/media/jogging--work-jogging.png": "/ActiveLifeLOG/static/media/jogging--work-jogging.3c55040d657e035462ab.png",
     "index.html": "/ActiveLifeLOG/index.html",
-    "main.2a1ed48f.css.map": "/ActiveLifeLOG/static/css/main.2a1ed48f.css.map",
-    "main.b1d0914d.js.map": "/ActiveLifeLOG/static/js/main.b1d0914d.js.map",
+    "main.b5648e94.css.map": "/ActiveLifeLOG/static/css/main.b5648e94.css.map",
+    "main.33e095a9.js.map": "/ActiveLifeLOG/static/js/main.33e095a9.js.map",
     "453.c232363a.chunk.js.map": "/ActiveLifeLOG/static/js/453.c232363a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2a1ed48f.css",
-    "static/js/main.b1d0914d.js"
+    "static/css/main.b5648e94.css",
+    "static/js/main.33e095a9.js"
   ]
 }
