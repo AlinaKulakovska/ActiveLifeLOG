@@ -1,3 +1,4 @@
+@import 'react-big-calendar/lib/sass/styles';
 @mixin break($width) {
     @media screen and (max-width: $width) {
         @content;

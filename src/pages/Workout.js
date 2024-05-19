@@ -16,7 +16,6 @@ function Workout() {
     const [spotifylink, setSpotifylink] = useState("https://open.spotify.com/embed/playlist/" + x[0].musicurl + "?utm_source=generator&theme=0")
 
 
-
     function searchlink() {
         let link = document.getElementById("youtubelink").value
         link = link.substr(16);

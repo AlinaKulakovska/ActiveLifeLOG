@@ -8,13 +8,14 @@ import workoutdata from '../components/workoutdata.js'
 import Card from '../components/Card.js'
 import { useState } from 'react';
 
+
+
 function Plan() {
 
     // restrict accsess
 
-
-
     const [workoutsdata, setWorkoutsData] = useState(workoutdata)
+
 
     function filter() {
         let radio = document.querySelector('input[name="select"]:checked').value;
@@ -31,6 +32,7 @@ function Plan() {
         const randomIndex = Math.floor(Math.random() * workoutdata.length);
         setWorkoutsData([workoutdata[randomIndex]])
     }
+
 
     function createCard(work) {
         return (
