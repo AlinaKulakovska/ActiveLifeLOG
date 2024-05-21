@@ -12,10 +12,7 @@ import { useState } from 'react';
 
 function Plan() {
 
-    // restrict accsess
-
     const [workoutsdata, setWorkoutsData] = useState(workoutdata)
-
 
     function filter() {
         let radio = document.querySelector('input[name="select"]:checked').value;
@@ -32,7 +29,6 @@ function Plan() {
         const randomIndex = Math.floor(Math.random() * workoutdata.length);
         setWorkoutsData([workoutdata[randomIndex]])
     }
-
 
     function createCard(work) {
         return (
@@ -53,9 +49,9 @@ function Plan() {
         <div className='text-white'>
             <div className='nav py-2 px-10 flex justify-between w-full items-center'>
                 <div>
-                    <img src={logo} className='w-24 md:w-48' alt='logo'></img>
+                    <img src={logo} className='w-24 md:w-48 min-w-24' alt='logo'></img>
                 </div>
-                <div className='flex items-center relative text-2xl md:text-3xl lg:text-5xl'>
+                <div className='flex items-center relative text-xl md:text-3xl lg:text-5xl'>
                     <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
                     <Link to='/tracker' className='flex items-center'><CgCalendarDates /> Tracker</Link>
                     <Link to='/' className='flex items-center' ><CgLogOut /> LogOut</Link>
@@ -85,6 +81,7 @@ function Plan() {
                 </div>
                 <button className='button' onClick={random}>Pick a random workout</button>
             </div>
+
             <h1 className='text-4xl text-center text-bold max-w-1/3'>Recent</h1>
             <div className='flex flex-wrap  justify-center mx-5'>
                 {workoutsdata.map(createCard)}

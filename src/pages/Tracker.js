@@ -9,26 +9,18 @@ import moment from 'moment'
 
 import Stack from '@mui/material/Stack';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import { initializeApp } from "firebase/app";
+import { onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, set, onValue } from 'firebase/database';
 
 function Tracker() {
     const localizer = momentLocalizer(moment)
-    // restrict accsess
-    const [eventlist, setEventlist] = useState([{
-        title: "Legs",
-        start: '2024-05-18',
-        end: '2024-05-18',
-    },
-    {
-        title: "Chest",
-        start: '2024-05-20',
-        end: '2024-05-20',
-    },
-    {
-        title: "Arms",
-        start: '2024-06-20',
-        end: '2024-06-20',
-    }])
+
+    const [eventlist, setEventlist] = useState([])
+
     const data = [
         { label: 'Group A', value: 400 },
         { label: 'Group B', value: 300 },
@@ -36,27 +28,73 @@ function Tracker() {
         { label: 'Group D', value: 200 },
     ];
 
-    function logworkout() {
+    const firebaseConfig = {
+        apiKey: "AIzaSyBAmVWgHjD44PKRy6GafDeMR-UlA0dniIM",
+        authDomain: "activelifelog-757be.firebaseapp.com",
+        databaseURL: "https://activelifelog-757be-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "activelifelog-757be",
+        storageBucket: "activelifelog-757be.appspot.com",
+        messagingSenderId: "976540861548",
+        appId: "1:976540861548:web:f80a8c1239841b1d5b4449"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    function writeevent() {
+        const db = getDatabase();
+        setEventlist([])
+        const reference = ref(db, 'events/' + (eventlist.length + 1) )
         let date = document.getElementById("date").value;
         let name = document.getElementById("name").value;
-        const newEvent = {
+        set(reference, {
             title: name,
             start: date,
-            end: date,
-        };
-
-        // Add the new event to the existing array
-        setEventlist([...eventlist, newEvent]);
+            end: date
+        })
 
     }
 
+    const db = getDatabase();
+
+    useEffect(() => {
+        const query = ref(db, "events/");
+        return onValue(query, (snapshot) => {
+            const data = snapshot.val();
+            if (snapshot.exists()) {
+                Object.values(data).map((event) => {
+                    setEventlist((events) => [...events, event]);
+                   
+                });
+            }
+           });
+    }, []);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = user.uid;
+                // ...
+                console.log("uid", uid)
+            } else {
+                // User is signed out
+                // ...
+                console.log("user is logged out")
+            }
+        });
+
+    })
+
     return (
         <div className='text-white'>
+
             <div className='nav py-2 px-10 flex justify-between w-full items-center'>
                 <div>
-                    <img src={logo} className='w-24 md:w-48' alt='logo'></img>
+                    <img src={logo} className='w-24 md:w-48 min-w-24' alt='logo'></img>
                 </div>
-                <div className='flex items-center relative text-2xl md:text-3xl lg:text-5xl'>
+                <div className='flex items-center relative text-xl md:text-3xl lg:text-5xl'>
                     <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
                     <Link to='/tracker' className='flex items-center'><CgCalendarDates /> Tracker</Link>
                     <Link to='/' className='flex items-center' ><CgLogOut /> LogOut</Link>
@@ -100,10 +138,10 @@ function Tracker() {
                 </Stack>
             </div>
 
-            <div className='flex flex-col items-center justify-center my-5'>
-                <input type='date' className='my-3' id='date'></input>
-                <input type='text' className='my-3' id='name' placeholder='name'></input>
-                <button className='button' onClick={logworkout}>Log a workout</button>
+            <div className='flex flex-wrap flex-col items-center justify-center my-5'>
+                <input type='date' className='my-3' id='date' required></input>
+                <input type='text' className='my-3' id='name' placeholder='name' required></input>
+                <button className='button' onClick={writeevent}>Log a workout</button>
             </div>
 
             <div className="mt-6" >

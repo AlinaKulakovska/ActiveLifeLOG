@@ -55,9 +55,9 @@ function Workout() {
         <div className="text-white">
             <div className='nav py-2 px-10 flex justify-between w-full items-center'>
                 <div>
-                    <img src={logo} className='w-24 md:w-48' alt='logo'></img>
+                    <img src={logo} className='w-24 md:w-48 min-w-24' alt='logo'></img>
                 </div>
-                <div className='flex items-center relative text-2xl md:text-3xl lg:text-5xl'>
+                <div className='flex items-center relative text-xl md:text-3xl lg:text-5xl'>
                     <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
                     <Link to='/tracker' className='flex items-center'><CgCalendarDates /> Tracker</Link>
                     <Link to='/' className='flex items-center' ><CgLogOut /> LogOut</Link>
@@ -125,7 +125,7 @@ function Workout() {
                         <div className=' pb-2 px-3'>
                             <h1 className="text-xl md:text-4xl">Stationary lunge</h1>
                             <div className='flex justify-between items-center border-b border-white'> <p className='text-md text-[rgba(204,202,202,0.5)]'> Dumbbells | <span className="yellow">16 x 3</span></p> </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p className="max-h-[200px] overflow-y-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </div>
                     </div>
                 </div>

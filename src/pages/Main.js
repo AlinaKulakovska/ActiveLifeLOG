@@ -10,42 +10,117 @@ import person from '../images/person2.png'
 import { useState } from 'react';
 import Footer from '../components/Footer.js';
 
+import {  signOut } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { signInWithEmailAndPassword,createUserWithEmailAndPassword } from 'firebase/auth';
 function Main() {
 
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBAmVWgHjD44PKRy6GafDeMR-UlA0dniIM",
+        authDomain: "activelifelog-757be.firebaseapp.com",
+        databaseURL: "https://activelifelog-757be-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "activelifelog-757be",
+        storageBucket: "activelifelog-757be.appspot.com",
+        messagingSenderId: "976540861548",
+        appId: "1:976540861548:web:f80a8c1239841b1d5b4449"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const [hide, setHide] = useState(true);
-    const [logined, setLogined] = useState(false);
-    const [hidemenu, setHideMenu] = useState(true);
+    const [logined, setLoginedx] = useState(false);
 
-    const validateEmail = () => {
-        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        const email = document.getElementById('email').value;
-
-
-        // const passwordinput = document.getElementById('password').value;
-        // const password = "12345"
-        // if (regex.test(email) && passwordinput == password) {
-
-        if (regex.test(email)) {
-            setLogined(true);
-            setHide(!hide);
-        } else {
-            alert("invalid email")
-        }
+    const loginfunc = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                setLoginedx(true)
+                console.log(logined)
+                setHide(true)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorCode, errorMessage)
+            });
+        // const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;        
     }
 
+    const signupfunc = async  (e) => {
+        e.preventDefault();
+        await createUserWithEmailAndPassword(auth, email, password)
+
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                setLoginedx(true)
+                setHide(true)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorCode, errorMessage)
+            });      
+    }
+
+    const handleLogout = () => {               
+        signOut(auth).then(() => {
+        // Sign-out successful.
+        setLoginedx(false)
+            console.log("Signed out successfully")
+            console.log(logined)
+        }).catch((error) => {
+        // An error happened.
+        console.log(error)
+        });
+    }
 
     return (
         <div className="App text-white">
 
             <div className={hide ? "hide" : ""}>
-                <div className='fixed py-12 px-4 md:py-24 md:px-48 z-30 ' id='login'>
-                    <button className='text-[#F0FF42] absolute top-5 right-5 text-2xl' onClick={() => setHide(!hide)}><CgClose /></button>
-                    <h1 className='text-md md:text-lg' >Email</h1>
-                    <input type='email' id='email' ></input>
-                    {/* <h1 className='text-md md:text-lg'>Password</h1>
-                    <input type='password' className='mb-5' id='password'></input> */}
-                    <div className='button mt-5' onClick={() => { validateEmail() }}>Login</div>
-                </div>
+
+                <form className='fixed py-12 px-4 md:py-24 md:px-48 z-30 ' id='login'>
+                    <div className='text-[#F0FF42] absolute top-5 right-5 text-2xl' onClick={() => setHide(!hide)}><CgClose /></div>
+                    <div  className='flex flex-col'>
+                        <label htmlFor="email-address" className='text-md md:text-lg'>Email address</label>
+                        <input
+                            id="email-address"
+                            name="email"
+                            type="email"
+                            required
+                            placeholder="Email address"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col'>
+                        <label htmlFor="password" className='text-md md:text-lg'> Password</label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            required
+                            placeholder="Password"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <button className='button mt-5' onClick={loginfunc}>
+                            Login
+                        </button>
+                        <button className='button mt-5 mx-5' onClick={signupfunc}>
+                            signup
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <section className='hero'>
@@ -54,13 +129,13 @@ function Main() {
                         <img src={logo} className='w-24 md:w-48' alt="logo"></img>
                     </div></Link>
                     <div className='flex items-center relative text-2xl md:text-3xl lg:text-5xl'>
-                        {logined ? <div className='flex'> 
-                         <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
+                        {logined ? <div className='flex'>
+                            <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
                             <Link to='/tracker' className='flex items-center'><CgCalendarDates /> Tracker</Link>
-                            <Link to='/' className='flex items-center' onClick={() => { setLogined(false); setHideMenu(!hidemenu) }}><CgLogOut /> LogOut</Link>
+                            <Link to='/' className='flex items-center'  onClick={handleLogout}><CgLogOut/> LogOut</Link>
                         </div> : ''}
                         <div >
-                            {logined ? <CiUser className='hover:cursor-pointer' onClick={() => setHideMenu(!hidemenu)} /> : <CiLogin className='text-2xl md:text-4xl lg:text-6xl hover:cursor-pointer' onClick={() => setHide(!hide)} />}
+                            {logined ?  "" : <CiLogin className='text-2xl md:text-4xl lg:text-6xl hover:cursor-pointer' onClick={() => setHide(!hide)} />}
                         </div>
                     </div>
                 </div>
