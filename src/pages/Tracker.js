@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../images/Logo.png'
 import victory from '../images/Victory.png'
-import { CiUser } from 'react-icons/ci';
+import { CiHome, CiUser } from 'react-icons/ci';
 import { CgAlbum, CgCalendarDates, CgLogOut } from 'react-icons/cg';
 import Footer from '../components/Footer.js';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
@@ -9,17 +9,17 @@ import moment from 'moment'
 
 import Stack from '@mui/material/Stack';
 import { PieChart } from '@mui/x-charts/PieChart';
-import { useState, useEffect } from 'react';
+import { useState, useEffect  } from 'react';
 
 import { initializeApp } from "firebase/app";
 import { onAuthStateChanged } from "firebase/auth";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { getDatabase, ref, set, onValue } from 'firebase/database';
 
 function Tracker() {
     const localizer = momentLocalizer(moment)
 
-    const [eventlist, setEventlist] = useState([])
+
 
     const data = [
         { label: 'Group A', value: 400 },
@@ -40,11 +40,41 @@ function Tracker() {
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    signOut(auth).then(() => {
+        // Sign-out successful.
+    }).catch((error) => {
+        // An error happened.
+    });
 
+    const [eventlist, setEventlist] = useState([{}])
+    const db = getDatabase();
+    const [uid, setUid] = useState('')
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUid(user.uid)
+            } else {
+                console.log("user is logged out")
+                setUid("")
+            }
+        });
+        const query = ref(db, "events/" + uid + "/");
+        return onValue(query, (snapshot) => {
+            const data = snapshot.val();
+            setEventlist([])
+            if (snapshot.exists()) {
+                Object.values(data).map((event) => {
+                    setEventlist((events) => [...events, event]);
+
+                });
+            }
+        });
+    }, [uid]);
     function writeevent() {
         const db = getDatabase();
-        setEventlist([])
-        const reference = ref(db, 'events/' + (eventlist.length + 1) )
+
+        const reference = ref(db, 'events/' + uid + "/" + (eventlist.length + 1))
+
         let date = document.getElementById("date").value;
         let name = document.getElementById("name").value;
         set(reference, {
@@ -54,98 +84,87 @@ function Tracker() {
         })
 
     }
-
-    const db = getDatabase();
-
-    useEffect(() => {
-        const query = ref(db, "events/");
-        return onValue(query, (snapshot) => {
-            const data = snapshot.val();
-            if (snapshot.exists()) {
-                Object.values(data).map((event) => {
-                    setEventlist((events) => [...events, event]);
-                   
-                });
-            }
-           });
-    }, []);
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                const uid = user.uid;
-                // ...
-                console.log("uid", uid)
-            } else {
-                // User is signed out
-                // ...
-                console.log("user is logged out")
-            }
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log("Signed out successfully")
+        }).catch((error) => {
+            // An error happened.
         });
-
-    })
+    }
 
     return (
-        <div className='text-white'>
+        <div>
+            <div className={uid.length > 1 ? '' : 'hide'}>
+                <div className='text-white'>
 
-            <div className='nav py-2 px-10 flex justify-between w-full items-center'>
-                <div>
-                    <img src={logo} className='w-24 md:w-48 min-w-24' alt='logo'></img>
+                    <div className='nav py-2 px-10 flex justify-between w-full items-center'>
+                        <div>
+                            <img src={logo} className='w-24 md:w-48 min-w-24' alt='logo'></img>
+                        </div>
+                        <div className='flex items-center relative text-xl md:text-2xl'>
+                            <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
+                            <Link to='/tracker' className='flex items-center'><CgCalendarDates /> Tracker</Link>
+                            <div className='flex items-center mr-3 hover:cursor-pointer' onClick={handleLogout} ><CgLogOut /> LogOut</div>
+                            <CiUser className='text-3xl'/>
+                        </div>
+                    </div>
+
+
+                    <div className='w-full flex flex-col items-center'>
+                        <img src={victory} className='w-1/3' alt='victory'></img>
+                        <h1 className='text-4xl text-center text-bold'>Tracker of your achievements</h1>
+                    </div>
+
+
+                    <div className='m-4 flex flex-wrap items-center justify-evenly'>
+                        <Calendar
+                            className='bg-white text-black rounded-lg p-2'
+                            localizer={localizer}
+                            events={eventlist}
+                            startAccessor="start"
+                            endAccessor="end"
+                            style={{ height: 400, width: 400 }}
+                        />
+
+
+                        <Stack direction="row">
+                            <PieChart
+                                series={[
+                                    {
+                                        paddingAngle: 5,
+                                        innerRadius: 60,
+                                        outerRadius: 80,
+                                        data,
+                                    },
+                                ]}
+                                margin={{ right: 5 }}
+                                width={200}
+                                height={200}
+
+                                legend={{ hidden: true }}
+                            />
+                        </Stack>
+                    </div>
+
+                    <div className='flex flex-wrap flex-col items-center justify-center my-5'>
+                        <input type='date' className='my-3' id='date' required></input>
+                        <input type='text' className='my-3' id='name' placeholder='name' required></input>
+                        <button className='button' onClick={writeevent}>Log a workout</button>
+                    </div>
+
+                    <div className="mt-6" >
+                        <Footer /></div>
                 </div>
-                <div className='flex items-center relative text-xl md:text-3xl lg:text-5xl'>
-                    <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
-                    <Link to='/tracker' className='flex items-center'><CgCalendarDates /> Tracker</Link>
-                    <Link to='/' className='flex items-center' ><CgLogOut /> LogOut</Link>
-                    <CiUser />
+
+            </div>
+            <div className={uid.length > 1 ? 'hide' : ''}>
+                <div className='flex justify-center'>
+                <h1 className='text-5xl text-center text-white'>You are not logged in   
+                <Link to='/' className='flex items-center text-3xl text-center' ><CiHome  className='text-white'/> To main page</Link>
+                </h1>
                 </div>
             </div>
-
-
-            <div className='w-full flex flex-col items-center'>
-                <img src={victory} className='w-1/3' alt='victory'></img>
-                <h1 className='text-4xl text-bold'>Tracker of your achievements</h1>
-            </div>
-
-
-            <div className='m-4 flex items-center justify-evenly'>
-                <Calendar
-                    className='bg-white text-black rounded-lg p-2'
-                    localizer={localizer}
-                    events={eventlist}
-                    startAccessor="start"
-                    endAccessor="end"
-                    style={{ height: 400, width: 400 }}
-                />
-
-
-                <Stack direction="row">
-                    <PieChart
-                        series={[
-                            {
-                                paddingAngle: 5,
-                                innerRadius: 60,
-                                outerRadius: 80,
-                                data,
-                            },
-                        ]}
-                        margin={{ right: 5 }}
-                        width={200}
-                        height={200}
-                        legend={{ hidden: true }}
-                    />
-                </Stack>
-            </div>
-
-            <div className='flex flex-wrap flex-col items-center justify-center my-5'>
-                <input type='date' className='my-3' id='date' required></input>
-                <input type='text' className='my-3' id='name' placeholder='name' required></input>
-                <button className='button' onClick={writeevent}>Log a workout</button>
-            </div>
-
-            <div className="mt-6" >
-                <Footer /></div>
         </div>
     )
 }
