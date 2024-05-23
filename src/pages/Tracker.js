@@ -57,7 +57,6 @@ function Tracker() {
                 setloggedin(true)
             } else {
                 console.log("user is logged out")
-                setUid("")
             }
         });
         const query = ref(db, "events/" + uid + "/");
@@ -72,6 +71,7 @@ function Tracker() {
             }
         });
     }, [uid]);
+    console.log(uid)
     function writeevent() {
         const db = getDatabase();
 
@@ -86,15 +86,7 @@ function Tracker() {
         })
 
     }
-    const handleLogout = () => {
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            console.log("Signed out successfully")
-        }).catch((error) => {
-            // An error happened.
-            setloggedin(false)
-        });
-    }
+
 
     return (
         <div>

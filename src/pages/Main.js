@@ -76,7 +76,6 @@ function Main() {
         // Sign-out successful.
         setLoginedx(false)
             console.log("Signed out successfully")
-            console.log(logined)
         }).catch((error) => {
         // An error happened.
         console.log(error)
