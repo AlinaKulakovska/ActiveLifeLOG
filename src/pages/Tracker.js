@@ -48,11 +48,13 @@ function Tracker() {
 
     const [eventlist, setEventlist] = useState([{}])
     const db = getDatabase();
+    const [loggedin, setloggedin] = useState(false)
     const [uid, setUid] = useState('')
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUid(user.uid)
+                setloggedin(true)
             } else {
                 console.log("user is logged out")
                 setUid("")
@@ -90,14 +92,14 @@ function Tracker() {
             console.log("Signed out successfully")
         }).catch((error) => {
             // An error happened.
+            setloggedin(false)
         });
     }
 
     return (
         <div>
-            <div className={uid.length > 1 ? '' : 'hide'}>
+            <div className={loggedin ? '' : 'hide'}>
                 <div className='text-white'>
-
                     <div className='nav py-2 px-10 flex justify-between w-full items-center'>
                         <div>
                             <img src={logo} className='w-24 md:w-48 min-w-24' alt='logo'></img>
@@ -105,7 +107,7 @@ function Tracker() {
                         <div className='flex items-center relative text-xl md:text-2xl'>
                             <Link to='/plan' className='flex items-center '><CgAlbum />Plan</Link>
                             <Link to='/tracker' className='flex items-center'><CgCalendarDates /> Tracker</Link>
-                            <div className='flex items-center mr-3 hover:cursor-pointer' onClick={handleLogout} ><CgLogOut /> LogOut</div>
+                            <Link to='/' className='flex items-center'><CgLogOut /> LogOut</Link>
                             <CiUser className='text-3xl'/>
                         </div>
                     </div>
@@ -158,7 +160,7 @@ function Tracker() {
                 </div>
 
             </div>
-            <div className={uid.length > 1 ? 'hide' : ''}>
+            <div className={loggedin ? 'hide' : ''}>
                 <div className='flex justify-center'>
                 <h1 className='text-5xl text-center text-white'>You are not logged in   
                 <Link to='/' className='flex items-center text-3xl text-center' ><CiHome  className='text-white'/> To main page</Link>
