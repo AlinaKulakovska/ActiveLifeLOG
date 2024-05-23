@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ActiveLifeLOG/static/css/main.37c4af85.css",
-    "main.js": "/ActiveLifeLOG/static/js/main.2772b628.js",
+    "main.js": "/ActiveLifeLOG/static/js/main.a61a9b5b.js",
     "static/js/453.46877901.chunk.js": "/ActiveLifeLOG/static/js/453.46877901.chunk.js",
     "static/media/hero.png": "/ActiveLifeLOG/static/media/hero.10622e7a0286ed2e6d49.png",
     "static/media/timer.png": "/ActiveLifeLOG/static/media/timer.28692d60e92819bb1fe9.png",
@@ -15,11 +15,11 @@
     "static/media/jogging--work-jogging.png": "/ActiveLifeLOG/static/media/jogging--work-jogging.3c55040d657e035462ab.png",
     "index.html": "/ActiveLifeLOG/index.html",
     "main.37c4af85.css.map": "/ActiveLifeLOG/static/css/main.37c4af85.css.map",
-    "main.2772b628.js.map": "/ActiveLifeLOG/static/js/main.2772b628.js.map",
+    "main.a61a9b5b.js.map": "/ActiveLifeLOG/static/js/main.a61a9b5b.js.map",
     "453.46877901.chunk.js.map": "/ActiveLifeLOG/static/js/453.46877901.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.37c4af85.css",
-    "static/js/main.2772b628.js"
+    "static/js/main.a61a9b5b.js"
   ]
 }
